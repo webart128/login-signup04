@@ -1,0 +1,223 @@
+:root{
+  --primary:#301afa;
+  --bg-dark:rgba(0,0,0,.55);
+  --radius:18px;
+  --transition:.4s ease;
+  font-family: Vazirmatn, sans-serif;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  height:100vh;
+  overflow:hidden;
+}
+
+/* Background */
+.bg-layer{
+  position:fixed;
+  inset:0;
+  background:
+    linear-gradient(var(--bg-dark),var(--bg-dark)),
+    url("../images/test.jpg") center/cover no-repeat;
+  filter:blur(2px);
+}
+
+/* Progress bar */
+.progress-bar{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:4px;
+  background:rgba(255,255,255,.2);
+  z-index:5;
+}
+.progress-fill{
+  display:block;
+  height:100%;
+  width:0%;
+  background:var(--primary);
+  transition:width var(--transition);
+}
+
+/* Floating card */
+.flow-card{
+  position:relative;
+  z-index:10;
+  width:360px;
+  max-width:90%;
+  background:#fff;
+  border-radius:var(--radius);
+  padding:30px;
+  box-shadow:0 20px 60px rgba(0,0,0,.3);
+  top:50%;
+  transform:translateY(-50%);
+  margin:auto;
+}
+
+/* Steps */
+.step{
+  display:none;
+  animation:fadeSlide .4s ease;
+  text-align:center;
+}
+.step-active{
+  display:block;
+}
+
+.step h2{
+  margin:0 0 10px;
+}
+.step p{
+  font-size:.9rem;
+}
+
+input{
+  width:100%;
+  padding:12px;
+  border-radius:12px;
+  border:1px solid #ddd;
+  margin-top:20px;
+  font-size:1rem;
+  text-align:center;
+}
+
+button{
+  width:100%;
+  margin-top:20px;
+  padding:12px;
+  border-radius:12px;
+  border:none;
+  background:var(--primary);
+  color:#fff;
+  font-size:1rem;
+  cursor:pointer;
+  transition:.3s;
+}
+button:disabled{
+  background:#ccc;
+  cursor:not-allowed;
+}
+
+/* OTP */
+.otp-group{
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  margin-top:20px;
+}
+.otp-group input{
+  width:100%;
+  max-width:50px;
+  font-size:1.2rem;
+}
+
+@keyframes fadeSlide{
+  from{opacity:0; transform:translateY(15px)}
+  to{opacity:1; transform:none}
+}
+/* OTP footer */
+.otp-footer{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:15px;
+  font-size:.85rem;
+  color:#666;
+}
+
+#resend{
+  background:none;
+  border:none;
+  color:var(--primary);
+  cursor:pointer;
+}
+#resend:disabled{
+  color:#aaa;
+  cursor:not-allowed;
+}
+
+/* Error message */
+.otp-error{
+  margin-top:10px;
+  font-size:.85rem;
+  color:#e74c3c;
+  min-height:18px;
+}
+
+/* Loading state */
+button.loading{
+  pointer-events:none;
+  background:#999;
+  position:relative;
+}
+button.loading::after{
+  content:"...";
+  position:absolute;
+  right:20px;
+}
+
+/* Shake animation */
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  25%{transform:translateX(-5px)}
+  75%{transform:translateX(5px)}
+}
+.step.shake{
+  animation:shake .3s;
+}
+/* ---------- کارت شناور و Scale ---------- */
+.flow-card{
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.flow-card.step-change{
+  transform: scale(1.03);
+  box-shadow:0 25px 80px rgba(0,0,0,.35);
+}
+
+/* ---------- Hover/Focus Input ---------- */
+input:focus{
+  border-color: var(--primary);
+  box-shadow:0 0 8px var(--primary);
+  transition: all .3s ease;
+}
+
+/* ---------- Hover Button ---------- */
+button:not(:disabled):hover{
+  transform: scale(1.03);
+  box-shadow:0 8px 20px rgba(0,0,0,.15);
+  transition: all .3s ease;
+}
+
+/* ---------- OTP Input Highlight ---------- */
+.otp-group input:focus{
+  border-color: var(--primary);
+  box-shadow: 0 0 6px var(--primary);
+  transition: all .2s ease;
+}
+
+/* ---------- Smooth fade/slide for steps ---------- */
+.step{
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all .4s ease;
+  display: none;
+}
+.step-active{
+  display:block;
+  opacity:1;
+  transform: translateY(0);
+}
+
+/* ---------- Background Overlay تغییر مرحله ---------- */
+body.step-1 .bg-layer{
+  filter: blur(2px) brightness(0.55);
+}
+body.step-2 .bg-layer{
+  filter: blur(2px) brightness(0.6) sepia(0.05);
+}
+body.step-3 .bg-layer{
+  filter: blur(2px) brightness(0.65) sepia(0.1);
+}
